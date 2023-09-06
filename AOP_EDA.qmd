@@ -1,27 +1,33 @@
 ---
 title: "AOP Data EDA"
 author: Amelia Minkin
-format: html
+format:
+  html:
+    embed-resources: true
 editor: visual
 ---
 
-## Quarto
+# Exploratory Data Analysis
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
-
-## Running Code
-
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+### Loading in packages
 
 ```{r}
-1 + 1
+library(tidyverse)
+library(aopdata)
 ```
 
-You can add options to executable code like this
+### Reading in data
 
 ```{r}
-#| echo: false
-2 * 2
+aop<-read_population(city="brasilia")
 ```
 
-The `echo: false` option disables the printing of code (only output is displayed).
+### Schema
+
+```{r}
+dim(aop) #OR
+glimpse(aop)
+
+#Proportion of missing values
+map_dbl(.x=aop, .f=~mean(is.na(.x)))
+```
